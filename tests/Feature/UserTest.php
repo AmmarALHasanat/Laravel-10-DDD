@@ -13,9 +13,10 @@ class UserTest extends TestCase
     /** @test */
     public function user_can_register_successfully_with_valid_data()
     {
+        $email =fake()->safeEmail();
         $response = $this->register([
             'name'=>'test',
-            'email'=>fake()->safeEmail(),
+            'email'=>$email,
             'password'=>'password',
             'c_password'=>'password'
         ]);
@@ -25,7 +26,7 @@ class UserTest extends TestCase
             'success'=>true,
             'data'=>[
                 'name'=>'test',
-                'email'=> User::latest()->first()->email
+                'email'=> $email
             ],
             'message'=>'User register successfully'
         ]);
